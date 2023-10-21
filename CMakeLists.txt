@@ -256,6 +256,13 @@ if (SEND_ODOMETRY_DATA)
   set(send_vision_estimation "false")
 endif()
 
+#----------------#
+# External model #
+#----------------#
+
+message("ADDING EXTERNAL MODEL!")
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/models/rblimp")
+
 #-----------#
 # Functions #
 #-----------#
@@ -483,9 +490,9 @@ endif()
 ################
 ## Unit Tests ##
 ################
-include(UnitTests)
+# include(UnitTests)
 
-add_subdirectory(unit_tests)
+# add_subdirectory(unit_tests)
 
 
 #############

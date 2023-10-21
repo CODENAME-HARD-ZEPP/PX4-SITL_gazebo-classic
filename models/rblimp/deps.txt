@@ -1,0 +1,9 @@
+pip3 install pymavlink &&
+apt install ros-noetic-rviz &&
+apt install ros-noetic-joint-state-publisher &&
+apt install ros-noetic-controller-manager
+apt install ros-noetic-octomap-ros
+apt install ros-noetic-octomap
+apt install ros-robot-state-publisher
+apt install librobot-state-publisher-dev
+ros-noetic-dynamic-robot-state-publisher
