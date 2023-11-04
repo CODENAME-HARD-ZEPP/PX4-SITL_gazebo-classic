@@ -249,8 +249,10 @@
       </visual>
     </link>
     <joint name='gondola_joint_blimb_body_joint' type='revolute'>
-      <pose relative_to='gondola_body_joint_link'>-1 0 1.05 0 1.5708 0</pose>
-      <parent>gondola_body_joint_link</parent>
+      <!-- <pose relative_to='gondola_body_joint_link'>-1 0 1.05 0 1.5708 0</pose> -->
+      <pose relative_to='base_link'>-1 0 1.05 0 1.5708 0</pose>
+      <!-- <parent>gondola_body_joint_link</parent> -->
+      <parent>base_link</parent>
       <child>blimp_body_link</child>
       <axis>
         <xyz>1 0 0</xyz>
@@ -316,7 +318,8 @@
     <joint name='blimp/bot_rud_base_joint_link_joint0' type='revolute'>
       <pose relative_to='blimp_body_link'>0.59 0 -1.5 0 -1.5708 0</pose>
       <parent>blimp_body_link</parent>
-      <child>bot_rud_base_joint_link0</child>
+      <!-- <child>bot_rud_base_joint_link0</child> -->
+      <child>bot_rud_part1_link</child>
       <axis>
         <xyz>1 0 0</xyz>
         <limit>
@@ -656,7 +659,8 @@
     <joint name='blimp/left_elv_base_joint_link_joint0' type='revolute'>
       <pose relative_to='blimp_body_link'>0 0.59 -1.5 1.5708 -1.5708 0</pose>
       <parent>blimp_body_link</parent>
-      <child>left_elv_base_joint_link0</child>
+      <!-- <child>left_elv_base_joint_link0</child> -->
+      <child>left_elv_part1_link</child>
       <axis>
         <xyz>1 0 0</xyz>
         <limit>
@@ -933,7 +937,8 @@
     <joint name='blimp/right_elv_base_joint_link_joint0' type='revolute'>
       <pose relative_to='blimp_body_link'>0 -0.59 -1.5 -1.5708 -1.5708 0</pose>
       <parent>blimp_body_link</parent>
-      <child>right_elv_base_joint_link0</child>
+      <!-- <child>right_elv_base_joint_link0</child> -->
+      <child>right_elv_part1_link</child>
       <axis>
         <xyz>1 0 0</xyz>
         <limit>
@@ -1210,7 +1215,8 @@
     <joint name='blimp/top_rud_base_joint_link_joint0' type='revolute'>
       <pose relative_to='blimp_body_link'>-0.59 0 -1.5 3.14159 -1.5708 0</pose>
       <parent>blimp_body_link</parent>
-      <child>top_rud_base_joint_link0</child>
+      <!-- <child>top_rud_base_joint_link0</child> -->
+      <child>top_rud_part1_link</child>
       <axis>
         <xyz>1 0 0</xyz>
         <limit>
@@ -1485,17 +1491,7 @@
             </vertical>
           </velocity_sensing>
         </gps>
-        <plugin name='gps_plugin' filename='libgazebo_gps_plugin.so'>
-          <robotNamespace/>
-          <gpsNoise>1</gpsNoise>
-          <gpsXYRandomWalk>2.0</gpsXYRandomWalk>
-          <gpsZRandomWalk>4.0</gpsZRandomWalk>
-          <gpsXYNoiseDensity>0.0002</gpsXYNoiseDensity>
-          <gpsZNoiseDensity>0.0004</gpsZNoiseDensity>
-          <gpsVXYNoiseDensity>0.2</gpsVXYNoiseDensity>
-          <gpsVZNoiseDensity>0.4</gpsVZNoiseDensity>
-        </plugin>
-        <!-- <plugin name='rotors_gazebo_gps_blimp_plugin' filename='librotors_gazebo_gps_plugin.so'>
+        <plugin name='rotors_gazebo_gps_blimp_plugin' filename='librotors_gazebo_gps_plugin.so'>
           <robotNamespace>blimp</robotNamespace>
           <linkName>gps_blimp_link</linkName>
           <gpsTopic>gps</gpsTopic>
@@ -1504,7 +1500,7 @@
           <verPosStdDev>0.0</verPosStdDev>
           <horVelStdDev>0.0</horVelStdDev>
           <verVelStdDev>0.0</verVelStdDev>
-        </plugin> -->
+        </plugin>
       </sensor>
     </link>
     <joint name='imutail_joint' type='revolute'>
@@ -2125,56 +2121,11 @@
       <imuSubTopic>imu</imuSubTopic>
       <motorSpeedCommandPubTopic>gazebo/command/motor_speed</motorSpeedCommandPubTopic>
     </plugin>
-
     <plugin name='gazebo_ros_control' filename='libgazebo_ros_control.so'>
       <robotNamespace>/blimp</robotNamespace>
     </plugin>
-
-    <plugin name='mavlink_interface' filename='libgazebo_mavlink_interface.so'>
-      <robotNamespace>blimp</robotNamespace>
-      <imuSubTopic>/imu</imuSubTopic>
-      <gpsSubTopic>/gps</gpsSubTopic>
-
-      <mavlink_addr>INADDR_ANY</mavlink_addr>
-      <mavlink_udp_port>14560</mavlink_udp_port>
-      <mavlink_tcp_port>4560</mavlink_tcp_port>
-      <serialEnabled>false</serialEnabled>
-      <serialDevice>/dev/ttyACM0</serialDevice>
-      <baudRate>921600</baudRate>
-      <qgc_addr>INADDR_ANY</qgc_addr>
-      <qgc_udp_port>14550</qgc_udp_port>
-
-      <hil_mode>false</hil_mode>
-      <hil_state_level>false</hil_state_level>
-      <enable_lockstep>true</enable_lockstep>
-      <use_tcp>true</use_tcp>
-
-      <send_vision_estimation>true</send_vision_estimation>
-      <send_odometry>false</send_odometry>
-
-      <control_channels>
-        <channel name='left_blade_link'>
-          <input_index>0</input_index>
-          <input_offset>0</input_offset>
-          <input_scaling>879.23</input_index>
-          <zero_position_disarmed>0</zero_position_disarmed>
-          <zero_position_armed>0</zero_position_armed>
-          <joint_control_type>velocity</joint_control_type>
-          <joint_name>stick_left_blade_joint</joint_name>
-        </channel>
-        <channel name='right_blade_link'>
-          <input_index>1</input_index>
-          <input_offset>0</input_offset>
-          <input_scaling>879.23</input_index>
-          <zero_position_disarmed>0</zero_position_disarmed>
-          <zero_position_armed>0</zero_position_armed>
-          <joint_control_type>velocity</joint_control_type>
-          <joint_name>stick_right_blade_joint</joint_name>
-        </channel>
-      </control_channels>
-    </plugin>
-
-    <!-- <plugin name='mavlink_interface' filename='librotors_gazebo_mavlink_interface.so'>
+    
+    <plugin name='mavlink_interface' filename='librotors_gazebo_mavlink_interface.so'>
       <robotNamespace>blimp</robotNamespace>
       <mavlinkControlSubTopic>/mavlink/from</mavlinkControlSubTopic>
       <imuSubTopic>imu</imuSubTopic>
@@ -2188,8 +2139,7 @@
       <referenceLatitude>47.3667</referenceLatitude>
       <referenceLongitude>8.55</referenceLongitude>
       <referenceAltitude>500.0</referenceAltitude>
-    </plugin> -->
-
+    </plugin>
     <plugin name='left_blade_link_motor_model' filename='librotors_gazebo_motor_model.so'>
       <robotNamespace>blimp</robotNamespace>
       <jointName>stick_left_blade_joint</jointName>
@@ -2207,27 +2157,7 @@
       <motorSpeedPubTopic>motor_speed/0</motorSpeedPubTopic>
       <rotorVelocitySlowdownSim>1</rotorVelocitySlowdownSim>
     </plugin>
-
-    <!-- <plugin name='left_blade_link_motor_model' filename='librotors_gazebo_motor_model.so'>
-      <robotNamespace>blimp</robotNamespace>
-      <jointName>stick_left_blade_joint</jointName>
-      <linkName>left_blade_link</linkName>
-      <turningDirection>ccw</turningDirection>
-      <timeConstantUp>1</timeConstantUp>
-      <timeConstantDown>1</timeConstantDown>
-      <maxRotVelocity>879.23</maxRotVelocity>
-      <motorConstant>0.00371178707</motorConstant>
-      <momentConstant>0.016</momentConstant>
-      <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
-      <motorNumber>0</motorNumber>
-      <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
-      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
-      <motorSpeedPubTopic>motor_speed/0</motorSpeedPubTopic>
-      <rotorVelocitySlowdownSim>1</rotorVelocitySlowdownSim>
-    </plugin> -->
-
-    <!-- <plugin name='right_blade_link_motor_model' filename='librotors_gazebo_motor_model.so'> -->
-    <plugin name='right_blade_link_motor_model' filename='libgazebo_motor_model.so'>
+    <plugin name='right_blade_link_motor_model' filename='librotors_gazebo_motor_model.so'>
       <robotNamespace>blimp</robotNamespace>
       <jointName>stick_right_blade_joint</jointName>
       <linkName>right_blade_link</linkName>
@@ -2244,9 +2174,7 @@
       <motorSpeedPubTopic>motor_speed/1</motorSpeedPubTopic>
       <rotorVelocitySlowdownSim>1</rotorVelocitySlowdownSim>
     </plugin>
-
-    <!-- <plugin name='bot_rud_motor_link_motor_model' filename='librotors_gazebo_motor_model.so'> -->
-    <plugin name='bot_rud_motor_link_motor_model' filename='libgazebo_motor_model.so'>
+    <plugin name='bot_rud_motor_link_motor_model' filename='librotors_gazebo_motor_model.so'>
       <robotNamespace>blimp</robotNamespace>
       <jointName>bot_rud_part1_bot_rud_motor_joint</jointName>
       <linkName>bot_rud_motor_link</linkName>
@@ -2263,13 +2191,10 @@
       <motorSpeedPubTopic>motor_speed/2</motorSpeedPubTopic>
       <rotorVelocitySlowdownSim>1</rotorVelocitySlowdownSim>
     </plugin>
-
-    <!-- <plugin name='rotors_gazebo_imugt_plugin' filename='librotors_gazebo_imu_plugin.so'> -->
-    <plugin name='rotors_gazebo_imugt_plugin' filename='libgazebo_imu_plugin.so'>
+    <plugin name='rotors_gazebo_imugt_plugin' filename='librotors_gazebo_imu_plugin.so'>
       <robotNamespace>blimp</robotNamespace>
       <linkName>imugt_link</linkName>
-      <!-- <imuTopic>ground_truth/imu</imuTopic> -->
-      <imuTopic>/imu</imuTopic>
+      <imuTopic>ground_truth/imu</imuTopic>
       <gyroscopeNoiseDensity>0.0</gyroscopeNoiseDensity>
       <gyroscopeRandomWalk>0.0</gyroscopeRandomWalk>
       <gyroscopeBiasCorrelationTime>1000.0</gyroscopeBiasCorrelationTime>
@@ -2279,7 +2204,6 @@
       <accelerometerBiasCorrelationTime>300.0</accelerometerBiasCorrelationTime>
       <accelerometerTurnOnBiasSigma>0.0</accelerometerTurnOnBiasSigma>
     </plugin>
-
     <plugin name='odometry_sensorgt' filename='librotors_gazebo_odometry_plugin.so'>
       <linkName>odometry_sensorgt_link</linkName>
       <robotNamespace>blimp</robotNamespace>
@@ -2302,9 +2226,7 @@
       <noiseUniformLinearVelocity>0 0 0</noiseUniformLinearVelocity>
       <noiseUniformAngularVelocity>0 0 0</noiseUniformAngularVelocity>
     </plugin>
-
-    <!-- <plugin name='rotors_gazebo_imutail_plugin' filename='librotors_gazebo_imu_plugin.so'> -->
-    <plugin name='rotors_gazebo_imutail_plugin' filename='libgazebo_imu_plugin.so'>
+    <plugin name='rotors_gazebo_imutail_plugin' filename='librotors_gazebo_imu_plugin.so'>
       <robotNamespace>blimp</robotNamespace>
       <linkName>imutail_link</linkName>
       <imuTopic>tail/imu</imuTopic>
@@ -2317,7 +2239,6 @@
       <accelerometerBiasCorrelationTime>300.0</accelerometerBiasCorrelationTime>
       <accelerometerTurnOnBiasSigma>0.0</accelerometerTurnOnBiasSigma>
     </plugin>
-
     <plugin name='odometry_sensortail' filename='librotors_gazebo_odometry_plugin.so'>
       <linkName>odometry_sensortail_link</linkName>
       <robotNamespace>blimp</robotNamespace>

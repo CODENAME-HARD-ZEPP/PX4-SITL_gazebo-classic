@@ -2156,7 +2156,7 @@
         <channel name='left_blade_link'>
           <input_index>0</input_index>
           <input_offset>0</input_offset>
-          <input_scaling>879.23</input_index>
+          <input_scaling>879.23</input_scaling>
           <zero_position_disarmed>0</zero_position_disarmed>
           <zero_position_armed>0</zero_position_armed>
           <joint_control_type>velocity</joint_control_type>
@@ -2165,7 +2165,7 @@
         <channel name='right_blade_link'>
           <input_index>1</input_index>
           <input_offset>0</input_offset>
-          <input_scaling>879.23</input_index>
+          <input_scaling>879.23</input_scaling>
           <zero_position_disarmed>0</zero_position_disarmed>
           <zero_position_armed>0</zero_position_armed>
           <joint_control_type>velocity</joint_control_type>
@@ -2190,7 +2190,8 @@
       <referenceAltitude>500.0</referenceAltitude>
     </plugin> -->
 
-    <plugin name='left_blade_link_motor_model' filename='librotors_gazebo_motor_model.so'>
+    <!-- <plugin name='left_blade_link_motor_model' filename='librotors_gazebo_motor_model.so'> -->
+    <plugin name='left_blade_link_motor_model' filename='libgazebo_motor_model'>
       <robotNamespace>blimp</robotNamespace>
       <jointName>stick_left_blade_joint</jointName>
       <linkName>left_blade_link</linkName>
