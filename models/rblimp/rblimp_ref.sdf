@@ -963,7 +963,7 @@
         </ode>
       </physics>
     </joint>
-    <!-- <link name='right_elv_base_joint_link0'>
+    <link name='right_elv_base_joint_link0'>
       <pose relative_to='blimp/right_elv_base_joint_link_joint0'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>0 0 0 0 -0 0</pose>
@@ -1090,7 +1090,7 @@
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
       </axis>
-    </joint> -->
+    </joint>
     <link name='right_elv_part1_link'>
       <pose relative_to='blimp_body_right_elv_part1_joint'>0 0 0 0 -0 0</pose>
       <inertial>
