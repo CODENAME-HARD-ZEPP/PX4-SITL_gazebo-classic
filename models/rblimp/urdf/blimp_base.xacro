@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<robot name="blimp" xmlns:xacro="http://ros.org/wiki/xacro">
+	<xacro:arg name="uav_name" default="blimp" />
+        <xacro:arg name="use_mesh_file" default="true" />
+        <xacro:arg name="enable_meshes" default="true" />
+        <xacro:arg name="enable_mavlink_interface" default="true" />
+        <xacro:arg name="enable_ground_truth" default="true" />
+        <xacro:arg name="enable_sensors" default="true" />
+        <xacro:arg name="enable_camera" default="true" />
+        <xacro:arg name="enable_wind" default="false" />
+        <xacro:arg name="enable_physics" default="true" />
+        <xacro:arg name="enable_logging" default="false" />
+
+	<!--*****************  component description  *****************-->
+	<xacro:include filename="$(find rblimp)/urdf/plugin_control.xacro" />
+	<xacro:include filename="$(find rblimp)/urdf/plugin_sensors.xacro" />
+	<xacro:include filename="$(find rblimp)/urdf/plugin_physics.xacro" />
+
+	<!--*****************  property description  *****************-->
+	<xacro:include filename="$(find rblimp)/urdf/description_property.xacro"/>
+
+	<!--*****************  mechanics description	 *****************-->
+	<xacro:include filename="$(find rblimp)/urdf/model_xacro.xacro" />
+	<xacro:include filename="$(find rblimp)/urdf/description_link.xacro"/>
+
+	<!--*****************  controller description  *****************-->
+	<xacro:include filename="$(find rblimp)/urdf/description_controller.xacro"/>
+
+	<!--*****************  sensor description  *****************-->
+	<xacro:include filename="$(find rblimp)/urdf/description_sensor.xacro"/>
+
+	<!--*****************  physics and extra plugins description  *****************-->
+	<xacro:include filename="$(find rblimp)/urdf/description_plugin.xacro"/>
+
+
+</robot>

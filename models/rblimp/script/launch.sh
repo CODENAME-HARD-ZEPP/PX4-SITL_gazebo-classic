@@ -1,0 +1,1 @@
+PX4_NO_FOLLOW_MODE=1 make px4_sitl gazebo_rblimp

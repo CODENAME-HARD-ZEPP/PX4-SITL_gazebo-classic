@@ -349,6 +349,8 @@ add_library(sensor_msgs SHARED ${SEN_PROTO_SRCS})
 # Plugins #
 #---------#
 
+add_subdirectory(models/rblimp)
+
 link_libraries(mav_msgs nav_msgs std_msgs sensor_msgs)
 link_libraries(physics_msgs)
 
@@ -482,7 +484,7 @@ set(plugins
 
   add_library(ForceVisual SHARED src/force_visual/force_visual.cpp)
   list(APPEND plugins ForceVisual)
-  
+
   add_library(AdvancedLiftDragPlugin SHARED src/liftdrag_plugin/advanced_liftdrag_plugin.cpp)
   list(APPEND plugins LiftDragPlugin)
 #endif()
